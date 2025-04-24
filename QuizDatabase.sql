@@ -28,3 +28,14 @@ CREATE TABLE options (
     is_correct BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 );
+CREATE TABLE scores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    quiz_id INT NOT NULL,
+    score INT NOT NULL,
+    total_questions INT NOT NULL,
+    percentage DECIMAL(5,2) NOT NULL,
+    completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE
+);
