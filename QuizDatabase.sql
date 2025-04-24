@@ -39,3 +39,20 @@ CREATE TABLE scores (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE
 );
+CREATE VIEW user_quiz_scores AS
+SELECT 
+    u.id AS user_id,
+    u.name AS user_name,
+    u.email,
+    q.id AS quiz_id,
+    q.title AS quiz_title,
+    s.score,
+    s.total_questions,
+    s.percentage,
+    s.completed_at
+FROM 
+    users u
+JOIN 
+    scores s ON u.id = s.user_id
+JOIN 
+    quizzes q ON s.quiz_id = q.id;
